@@ -146,13 +146,52 @@
     // --------------------------------------------------------------
     //
     // test if a specific major diagonal on this board contains a conflict
-    hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+    // input used to say majorDiagonalColumnIndexAtFirstRow
+    hasMajorDiagonalConflictAt: function(index) {
+ 
+      var counter = 0;
+      var board = this.rows()
+      for (var i = 0; i < board.length; i++) {
+        if (index < 0 && (Math.abs(index) + i) < board.length) {
+          if (board[Math.abs(index) + i][i] === 1) {
+            counter++;
+            if (counter > 1) {
+              return true;
+            }
+          }
+        }
+        if (index >= 0 && (index + i) < board.length) {
+          if (board[i][index + i] === 1) {
+            counter++;
+             if (counter > 1) {
+              return true;
+            }
+          }
+        }
+      }
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      // var result = false;
+      // var getVal = this._getFirstRowColumnIndexForMajorDiagonalOn 
+      // for (var i = 0; i < this.rows().length - 1; i++) {
+      //   for (var j = 0; j < this.rows().length; j++) {
+      //     if (this.hasMajorDiagonalConflictAt(getVal(i,j))) {
+      //       result = true;
+      //     }
+      //   }
+        
+        
+      // }
+      // return result;
+      for (var i = -(this.rows().length - 2); i < this.rows().length - 1; i++) {
+        if (this.hasMajorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -184,3 +223,33 @@
   };
 
 }());
+
+
+
+
+
+     // var n = this.get('n');
+      // var count = n - index;
+      // var counter = 0;
+      // var currentRow = 0;
+      // var result = false;
+      // var ind = index;
+      
+      // var checkDiagonal = (currentRow) => {
+      //   while (count > 0) {
+      //     // console.log(this.rows()[currentRow][ind])
+      //     if (this.rows()[currentRow][ind] === 1) {
+      //       counter++;
+      //       if (counter > 1) {
+      //         result = true;
+      //       }
+      //     }
+      //     currentRow++;
+      //     ind++;
+      //     count--;
+      //     checkDiagonal(currentRow);
+      //   }
+      // };
+      // checkDiagonal(currentRow);
+      // // console.log(result);
+      // return result;
