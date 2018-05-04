@@ -190,33 +190,22 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(index) {
-     var counter = 0;
+      var counter = 0;
       var board = this.rows()
       for (var i = 0; i < board.length; i++) {
-        if (index >= 0 && board.length -1 - index - i >= 0) {
-          if (board[index + i][(board.length - 1) - i] === 1) {
-            counter++;
-            if (counter > 1) {
-              return true;
-            }
+        if (board[i][index - i] === 1 && (index - 1) > -1) {
+          counter++;
+          if (counter > 1) {
+            return true;
           }
-        }
-        if (index< 0 && board.length -1 + index - i >= 0) {
-          if (board[i][board.length -1 + index - i] === 1) {
-            counter++;
-            if (counter > 1) {
-              return true;
-            }
-          }
-          
-        }
+        } 
       }
       return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      for (var i = -(this.rows().length - 2); i < this.rows().length - 1; i++) {
+      for (var i = 1; i < this.rows().length + 2; i++) {
         if (this.hasMinorDiagonalConflictAt(i)) {
           return true;
         }
@@ -238,33 +227,3 @@
   };
 
 }());
-
-
-
-
-
-     // var n = this.get('n');
-      // var count = n - index;
-      // var counter = 0;
-      // var currentRow = 0;
-      // var result = false;
-      // var ind = index;
-      
-      // var checkDiagonal = (currentRow) => {
-      //   while (count > 0) {
-      //     // console.log(this.rows()[currentRow][ind])
-      //     if (this.rows()[currentRow][ind] === 1) {
-      //       counter++;
-      //       if (counter > 1) {
-      //         result = true;
-      //       }
-      //     }
-      //     currentRow++;
-      //     ind++;
-      //     count--;
-      //     checkDiagonal(currentRow);
-      //   }
-      // };
-      // checkDiagonal(currentRow);
-      // // console.log(result);
-      // return result;
